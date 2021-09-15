@@ -31,6 +31,7 @@ export default {
     '~/assets/styles/base.scss',
     '~/assets/styles/main.scss',
     '~/assets/fonts/flag-icon-css-master/css/flag-icon.min.css',
+    '~/assets/styles/tailwind.css',
   ],
 
   layoutTransition: 'layout',

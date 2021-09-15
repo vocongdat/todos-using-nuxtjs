@@ -1,9 +1,9 @@
 <template>
   <div class="todos flex flex-col w-full mt-10">
     <div class="todos__header flex flex-row justify-between items-center mb-5">
-      <h2 class="text-2xl font-medium">Projects</h2>
+      <h2 class="text-2xl font-medium">{{ $t('projects') }}</h2>
       <div>
-        <span>This Week</span>
+        <span>{{ $t('thisWeek') }}</span>
         <i class="fas fa-chevron-down text-sm"></i>
       </div>
     </div>
