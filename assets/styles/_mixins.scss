@@ -1,0 +1,23 @@
+@mixin prefix($property, $value, $prefixes) {
+  @each $prefix in $prefixes {
+    -#{$prefix}-#{$property}: $value;
+  }
+  #{$property}: $value;
+}
+
+@mixin navbar {
+  .navbar-list {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-size: 24px;
+    .navbar-item {
+      color: var.$primary-color;
+
+      + .navbar-item {
+        margin-left: 16px;
+      }
+    }
+  }
+}
