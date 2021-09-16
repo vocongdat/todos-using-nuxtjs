@@ -6,9 +6,9 @@
       </label>
       <input
         class="text-gray-300 font-bold focus:text-gray-900 outline-none"
-        type="text"
         id="search"
-        :placeholder="Search"
+        type="text"
+        placeholder="Search"
       />
     </div>
     <ul class="flex flex-row items-center mx-2 list-none">

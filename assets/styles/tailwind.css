@@ -38,6 +38,7 @@
     p-3
     select-none
     shadow-xl
+    hover:animate-bounce
     cursor-grabbing;
   }
   .todo-header {
@@ -58,5 +59,18 @@
     border-white
     border-solid
     rounded-full;
+  }
+  .dragging {
+    @apply transition-all origin-center transform rotate-45;
+  }
+
+  .notify-status {
+    @apply animate-pulse
+    relative
+    bottom-0.5
+    inline-flex
+    rounded-full
+    h-2
+    w-2;
   }
 }

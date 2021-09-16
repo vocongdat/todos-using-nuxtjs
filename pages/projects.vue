@@ -19,9 +19,12 @@
           <i class="fas fa-plus"></i>
         </button>
 
-        <div class="todo todo__item--main">
+        <div class="todo todo__item--main" draggable="true">
           <div class="todo-header todo__item-header">
-            <h4 class="font-semibold">Desigin</h4>
+            <h4 class="font-semibold">
+              <span class="notify-status bg-green-500"></span>
+              Desigin
+            </h4>
             <i class="fas fa-paperclip text-gray-400"></i>
           </div>
 
@@ -42,9 +45,12 @@
           </div>
         </div>
 
-        <div class="todo todo__item--main">
+        <div class="todo todo__item--main" draggable="true">
           <div class="todo-header todo__item-header">
-            <h4 class="font-semibold">Development</h4>
+            <h4 class="font-semibold">
+              <span class="notify-status bg-notify"></span>
+              Development
+            </h4>
             <i class="fas fa-paperclip text-gray-400"></i>
           </div>
 
@@ -72,9 +78,12 @@
           <i class="fas fa-plus"></i>
         </button>
 
-        <div class="todo todo__item--main">
+        <div class="todo todo__item--main" draggable="true">
           <div class="todo-header todo__item-header">
-            <h4 class="font-semibold">Development</h4>
+            <h4 class="font-semibold">
+              <span class="notify-status bg-notify"></span>
+              Development
+            </h4>
             <i class="fas fa-paperclip text-gray-400"></i>
           </div>
 
@@ -90,9 +99,13 @@
           </div>
         </div>
 
-        <div class="todo todo__item--main">
+        <div class="todo todo__item--main" draggable="true">
           <div class="todo-header todo__item-header">
-            <h4 class="font-semibold">Logo redisign</h4>
+            <h4 class="font-semibold">
+              <span class="notify-status bg-blue-600"></span>
+              Logo redisign
+            </h4>
+
             <i class="fas fa-paperclip text-gray-400"></i>
           </div>
 
@@ -127,7 +140,66 @@
 </template>
 
 <script>
-export default {}
+export default {
+  mounted() {
+    const containers = document.querySelectorAll('.todo-container')
+    const draggables = document.querySelectorAll('.todo__item--main')
+
+    draggables.forEach((draggable) => {
+      draggable.addEventListener('dragstart', () => {
+        draggable.classList.add('dragging')
+      })
+
+      draggable.addEventListener('dragend', () => {
+        draggable.classList.remove('dragging')
+      })
+
+      draggable.addEventListener('dragenter', (e) => {
+        console.log('dragenter', e.target.className)
+        if (e.target.className === 'todo__item--main') {
+          containers.classList.add('bg-green-500')
+        }
+      })
+      draggable.addEventListener('dragleave', (e) => {
+        console.log('dragleave', e.target.className)
+        if (e.target.className === 'todo__item--main') {
+          containers.classList.remove('bg-green-500')
+        }
+      })
+    })
+    const getDragAfterElement = (container, y) => {
+      const draggableElements = [
+        ...container.querySelectorAll('.todo__item--main:not(.dragging)'),
+      ]
+
+      return draggableElements.reduce(
+        (closest, child) => {
+          const box = child.getBoundingClientRect()
+          const offset = y - box.top - box.height / 2
+          if (offset < 0 && offset > closest.offset) {
+            return { offset, element: child }
+          } else {
+            return closest
+          }
+        },
+        { offset: Number.NEGATIVE_INFINITY }
+      ).element
+    }
+
+    containers.forEach((container) => {
+      container.addEventListener('dragover', (e) => {
+        e.preventDefault()
+        const afterElement = getDragAfterElement(container, e.clientY)
+        const draggable = document.querySelector('.dragging')
+        if (afterElement == null) {
+          container.appendChild(draggable)
+        } else {
+          container.insertBefore(draggable, afterElement)
+        }
+      })
+    })
+  },
+}
 </script>
 
 <style lang="scss" scoped>
