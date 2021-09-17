@@ -38,7 +38,7 @@
     p-3
     select-none
     shadow-xl
-    hover:animate-bounce
+    /* hover:animate-bounce */
     cursor-grabbing;
   }
   .todo-header {

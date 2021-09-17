@@ -1,7 +1,7 @@
 <template>
   <div class="todo-container todo__item">
     <div class="flex justify-between items-center my-2">
-      <h3 class="my-1 font-medium">{{ title }}</h3>
+      <h3 class="todo-container-title my-1 font-medium">{{ title }}</h3>
       <span class="bg-green-300 px-1.5 rounded-lg">2</span>
     </div>
 
@@ -60,17 +60,37 @@ export default {
     },
   },
 
+  data() {
+    return {
+      state: '',
+    }
+  },
+
   mounted() {
     const containers = document.querySelectorAll('.todo-container')
     const draggables = document.querySelectorAll('.todo__item--main')
+
+    const getParent = (element, selector) => {
+      while (element.parentElement) {
+        if (element.parentElement.matches(selector)) {
+          return element.parentElement
+        }
+        element = element.parentElement
+      }
+    }
 
     draggables.forEach((draggable) => {
       draggable.addEventListener('dragstart', () => {
         draggable.classList.add('dragging')
       })
 
-      draggable.addEventListener('dragend', () => {
+      draggable.addEventListener('dragend', (e) => {
         draggable.classList.remove('dragging')
+        const containerDragging = getParent(e.target, '.todo-container')
+        const titleDragging = containerDragging.querySelector(
+          '.todo-container-title'
+        ).outerText
+        this.state = titleDragging
       })
     })
     const getDragAfterElement = (container, y) => {

@@ -22,14 +22,30 @@ import project from '~/apollo/queries/project'
 export default {
   data() {
     return {
-      todoCreate: [],
-      todoProcess: [],
-      todoCompleted: [],
+      todoByProject: [],
     }
   },
 
   head: {
     title: 'To do',
+  },
+
+  computed: {
+    todoCreate() {
+      return (
+        this.todoByProject.filter((todo) => todo.status === 'created') || []
+      )
+    },
+    todoProcess() {
+      return (
+        this.todoByProject.filter((todo) => todo.status === 'process') || []
+      )
+    },
+    todoCompleted() {
+      return (
+        this.todoByProject.filter((todo) => todo.status === 'completed') || []
+      )
+    },
   },
 
   apollo: {
@@ -39,20 +55,10 @@ export default {
       variables() {
         return { projectId: '6143f615d28fa9d72566cb25' }
       },
+      result({ data: { todoByProject }, loading, networkStatus }) {
+        this.todoByProject = todoByProject
+      },
     },
-  },
-
-  beforeMount() {
-    if (this.todoByProject)
-      this.todoCreate = this.todoByProject.filter(
-        (todo) => todo.status === 'created'
-      )
-    this.todoProcess = this.todoByProject.filter(
-      (todo) => todo.status === 'process'
-    )
-    this.todoCompleted = this.todoByProject.filter(
-      (todo) => todo.status === 'completed'
-    )
   },
 }
 </script>
