@@ -1,0 +1,10 @@
+query TodoByProject($projectId: ID!) {
+  todoByProject(projectId: $projectId) {
+    id
+    title
+    content
+    status
+    team
+    projectId
+  }
+}

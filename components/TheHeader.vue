@@ -6,8 +6,8 @@
       </label>
       <input
         class="text-gray-300 font-bold focus:text-gray-900 outline-none"
-        type="text"
         id="search"
+        type="text"
         placeholder="Search"
       />
     </div>
@@ -22,7 +22,7 @@
         <h6 class="mr-2 font-medium">Công Đạt</h6>
         <i class="fas fa-chevron-down text-sm pt-1"></i>
       </li>
-      <li class="w-14 h-w-14 overflow-hidden rounded-full mr-4 cursor-pointer">
+      <li class="w-11 h-w-11 overflow-hidden rounded-full mr-4 cursor-pointer">
         <img
           src="https://images.generated.photos/Yj7i8h8Zw-reP9sFKF2kvFKa_f0NlJmdMVxgAB1m4xo/rs:fit:512:512/wm:0.95:sowe:18:18:0.33/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/MTUyMzMwLmpwZw.jpg"
           alt="Công Đạt Avatar"

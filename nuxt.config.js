@@ -31,6 +31,7 @@ export default {
     '~/assets/styles/base.scss',
     '~/assets/styles/main.scss',
     '~/assets/fonts/flag-icon-css-master/css/flag-icon.min.css',
+    '~/assets/styles/tailwind.css',
   ],
 
   layoutTransition: 'layout',
@@ -39,6 +40,15 @@ export default {
     name: 'slide-fade',
     beforeEnter(el) {
       console.log('Before enter...', el)
+    },
+  },
+  router: {
+    scrollBehavior(to, from, savedPosition) {
+      if (savedPosition) {
+        return savedPosition
+      } else {
+        return { x: 0, y: 50 }
+      }
     },
   },
 
@@ -84,6 +94,8 @@ export default {
         },
       },
     ],
+    // Apollo
+    '@nuxtjs/apollo',
   ],
 
   i18n: {
@@ -117,6 +129,14 @@ export default {
     baseURL: process.env.API_POSTS_URL,
   },
 
+  apollo: {
+    clientConfigs: {
+      default: {
+        httpEndpoint: 'http://localhost:5000/graphql',
+      },
+    },
+  },
+
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
@@ -129,7 +149,10 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
-  serverMiddleware: ['~/middleware/server-logger'],
+  serverMiddleware: [
+    '~/middleware/server-logger',
+    '~/middleware/authenticated',
+  ],
 
   publicRuntimeConfig: {
     baseURL: process.env.API_POSTS_URL || 'https://nuxtjs.org',

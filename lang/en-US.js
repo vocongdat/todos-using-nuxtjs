@@ -1,5 +1,13 @@
 export default async (context, locale) => {
   return await Promise.resolve({
-    welcome: 'Welcome to your',
+    overview: 'Overview',
+    stars: 'Stars',
+    projects: 'Projects',
+    chat: 'Chat',
+    calender: 'Calender',
+    settings: 'Settings',
+    logout: 'Log out',
+    thisWeek: 'This Week',
+    search: 'Search',
   })
 }
