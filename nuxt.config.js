@@ -42,6 +42,15 @@ export default {
       console.log('Before enter...', el)
     },
   },
+  router: {
+    scrollBehavior(to, from, savedPosition) {
+      if (savedPosition) {
+        return savedPosition
+      } else {
+        return { x: 0, y: 50 }
+      }
+    },
+  },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
@@ -85,6 +94,8 @@ export default {
         },
       },
     ],
+    // Apollo
+    '@nuxtjs/apollo',
   ],
 
   i18n: {
@@ -118,6 +129,14 @@ export default {
     baseURL: process.env.API_POSTS_URL,
   },
 
+  apollo: {
+    clientConfigs: {
+      default: {
+        httpEndpoint: 'http://localhost:5000/graphql',
+      },
+    },
+  },
+
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
@@ -130,7 +149,10 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
-  serverMiddleware: ['~/middleware/server-logger'],
+  serverMiddleware: [
+    '~/middleware/server-logger',
+    '~/middleware/authenticated',
+  ],
 
   publicRuntimeConfig: {
     baseURL: process.env.API_POSTS_URL || 'https://nuxtjs.org',

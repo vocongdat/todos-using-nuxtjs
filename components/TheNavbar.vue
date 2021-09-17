@@ -65,10 +65,9 @@ export default {
   },
   computed: {
     availableLocales() {
-      const index = this.$i18n.locales.findIndex(
-        (i) => i.code !== this.$i18n.locale
-      )
-      console.log(index)
+      // const index = this.$i18n.locales.findIndex(
+      //   (i) => i.code !== this.$i18n.locale
+      // )
       // if (index >= this.$i18n.locales.length) return [this.$i18n.locales[0]]
       // return [this.$i18n.locales[index + 1]]
       return this.$i18n.locales.filter((i) => i.code !== this.$i18n.locale)

@@ -1,5 +1,8 @@
 <template>
-  <h1>Overview</h1>
+  <div>
+    <h1>Overview</h1>
+    <ButtonGradient />
+  </div>
 </template>
 
 <script>
