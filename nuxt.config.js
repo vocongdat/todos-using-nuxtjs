@@ -62,6 +62,7 @@ export default {
         '~/plugins/filters',
         '~/plugins/vee-validate',
         '~/plugins/validation',
+        { src: '~plugins/vue-calendar.js', mode: 'client' },
     ],
 
     // Auto import components: https://go.nuxtjs.dev/config-components

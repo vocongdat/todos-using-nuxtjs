@@ -51,7 +51,6 @@ export default {
             },
             result({ data: { todoByProject }, loading, networkStatus }) {
                 this.todoByProject = todoByProject;
-                // console.log(data);
             },
         },
     },

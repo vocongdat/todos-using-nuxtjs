@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Overview</h1>
+        <h1 class="text-2xl font-medium">Overview</h1>
         <ButtonGradient />
     </div>
 </template>
