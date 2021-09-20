@@ -1,9 +1,9 @@
 <template>
-  <h1>Chat</h1>
+    <h1>Chat</h1>
 </template>
 
 <script>
-export default {}
+export default {};
 </script>
 
 <style></style>

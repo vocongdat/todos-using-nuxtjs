@@ -1,11 +1,11 @@
 <template>
-  <ButtonGradient />
+    <ButtonGradient />
 </template>
 
 <script>
 export default {
-  // middleware: 'authenticated',
-}
+    // middleware: 'authenticated',
+};
 </script>
 
 <style lang="scss" scoped></style>

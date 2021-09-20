@@ -1,39 +1,55 @@
 <template>
-  <div class="addTask">
-    <h1>Add Task</h1>
-    <ul>
-      <li v-for="todo in todos" :key="todo.text">
-        <input :checked="todo.done" @change="toggle(todo)" type="checkbox" />
-        <span :class="{ done: todo.done }">{{ todo.text }}</span>
-      </li>
-    </ul>
-  </div>
+    <div class="my-8">
+        <ValidationObserver ref="form" v-slot="{ reset }">
+            <form @submit.prevent="onSubmit" @reset.prevent="reset">
+                <InputForm labelTitle="title" />
+                <TextareaForm />
+                <SelectForm />
+                <CheckboxForm />
+                <div class="flex flex-row my-3 gap-3">
+                    <button class="btn bg-green-400" type="submit">Add Todo</button>
+                    <button class="btn bg-red-400" type="reset">Reset</button>
+                </div>
+            </form>
+        </ValidationObserver>
+    </div>
 </template>
 
 <script>
+import { ValidationObserver } from 'vee-validate';
+
 export default {
-  computed: {
-    todos() {
-      return this.$store.state.todos.list
+    components: {
+        ValidationObserver,
     },
-  },
-}
+
+    data: () => ({
+        firstName: '',
+        lastName: '',
+        email: '',
+    }),
+
+    methods: {
+        onSubmit() {
+            this.$refs.form.validate().then((success) => {
+                if (!success) {
+                    return;
+                }
+
+                alert('Form has been submitted!');
+
+                // Resetting Values
+                this.firstName = this.lastName = this.email = '';
+
+                // Wait until the models are updated in the UI
+                this.$nextTick(() => {
+                    this.$refs.form.reset();
+                });
+            });
+        },
+    },
+};
 </script>
 
-<style scoped>
-.addTask {
-  background: rgba(0, 0, 0, 0.5)
-    url('~/assets/images/VVS_PCWallpaper_Light.png') no-repeat center center /
-    cover;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-h1 {
-  color: chocolate;
-  font-size: 32px;
-  font-weight: 700;
-}
-</style>
+<style></style>
+SelectForm

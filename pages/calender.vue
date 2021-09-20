@@ -1,9 +1,9 @@
 <template>
-  <h1>Calender</h1>
+    <h1>Calender</h1>
 </template>
 
 <script>
-export default {}
+export default {};
 </script>
 
 <style></style>

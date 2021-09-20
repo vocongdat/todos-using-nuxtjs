@@ -1,66 +1,61 @@
 <template>
-  <div class="todos flex flex-col w-full mt-10">
-    <div class="todos__header flex flex-row justify-between items-center mb-5">
-      <h2 class="text-2xl font-medium">{{ $t('projects') }}</h2>
-      <div>
-        <span>{{ $t('thisWeek') }}</span>
-        <i class="fas fa-chevron-down text-sm"></i>
-      </div>
-    </div>
+    <div class="todos flex flex-col w-full mt-10">
+        <div class="todos__header flex flex-row justify-between items-center mb-5">
+            <h2 class="text-2xl font-medium">{{ $t('projects') }}</h2>
+            <div>
+                <span>{{ $t('thisWeek') }}</span>
+                <i class="fas fa-chevron-down text-sm"></i>
+            </div>
+        </div>
 
-    <div class="todos__main grid grid-cols-3 gap-6 mb-6 min-h-screen">
-      <Todo title="To do" :listTodo="todoCreate" />
-      <Todo title="In process" :listTodo="todoProcess" />
-      <Todo title="Completed" :listTodo="todoCompleted" />
+        <div class="todos__main grid grid-cols-3 gap-6 mb-6 min-h-screen">
+            <Todo title="To do" :listTodo="todoCreate" />
+            <Todo title="In process" :listTodo="todoProcess" />
+            <Todo title="Completed" :listTodo="todoCompleted" />
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
-import project from '~/apollo/queries/project'
+import project from '~/apollo/queries/project';
 
 export default {
-  data() {
-    return {
-      todoByProject: [],
-    }
-  },
+    data() {
+        return {
+            todoByProject: [],
+        };
+    },
 
-  head: {
-    title: 'To do',
-  },
+    head: {
+        title: 'To do',
+    },
 
-  computed: {
-    todoCreate() {
-      return (
-        this.todoByProject.filter((todo) => todo.status === 'created') || []
-      )
+    computed: {
+        todoCreate() {
+            return this.todoByProject.filter((todo) => todo.status === 'created') || [];
+        },
+        todoProcess() {
+            return this.todoByProject.filter((todo) => todo.status === 'process') || [];
+        },
+        todoCompleted() {
+            return this.todoByProject.filter((todo) => todo.status === 'completed') || [];
+        },
     },
-    todoProcess() {
-      return (
-        this.todoByProject.filter((todo) => todo.status === 'process') || []
-      )
-    },
-    todoCompleted() {
-      return (
-        this.todoByProject.filter((todo) => todo.status === 'completed') || []
-      )
-    },
-  },
 
-  apollo: {
-    todoByProject: {
-      prefetch: true,
-      query: project,
-      variables() {
-        return { projectId: '6143f615d28fa9d72566cb25' }
-      },
-      result({ data: { todoByProject }, loading, networkStatus }) {
-        this.todoByProject = todoByProject
-      },
+    apollo: {
+        todoByProject: {
+            prefetch: true,
+            query: project,
+            variables() {
+                return { projectId: '6143f615d28fa9d72566cb25' };
+            },
+            result({ data: { todoByProject }, loading, networkStatus }) {
+                this.todoByProject = todoByProject;
+                // console.log(data);
+            },
+        },
     },
-  },
-}
+};
 </script>
 
 <style lang="scss" scoped></style>
