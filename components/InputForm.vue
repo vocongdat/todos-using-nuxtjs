@@ -6,12 +6,13 @@
         <div class="mt-1">
             <input
                 :id="labelTitle"
-                v-model="value"
+                :value="value"
                 :name="labelTitle"
                 type="text"
                 :placeholder="placeholderText"
                 class="control"
                 :class="classes"
+                @input="updateValue"
             />
         </div>
         <span class="text-red-500">{{ errors[0] | capitalize }}</span>
@@ -35,12 +36,16 @@ export default {
             type: String,
             default: 'Enter text...',
         },
+        value: {
+            type: String,
+            default: '',
+        },
     },
 
-    data() {
-        return {
-            value: '',
-        };
+    methods: {
+        updateValue(event) {
+            this.$emit('input', event.target.value);
+        },
     },
 };
 </script>

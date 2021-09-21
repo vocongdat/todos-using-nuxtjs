@@ -22,12 +22,16 @@ const i18n = new VueI18n({
 
 const config = {
     aria: true,
-    classNames: {},
-    classes: false,
+    classNames: {
+        valid: 'is-valid',
+        invalid: 'is-invalid',
+        dirty: ['is-dirty', 'is-dirty'],
+    },
+    classes: true,
     delay: 0,
     dictionary: null,
     errorBagName: 'errors', // change if property conflicts
-    events: 'input|blur',
+    events: 'input|blur|change',
     fieldsBagName: 'fields',
     // i18n: null, // the vue-i18n plugin instance
     i18nRootKey: 'validations', // the nested key under which the validation messages will be located

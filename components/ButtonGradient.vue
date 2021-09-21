@@ -1,5 +1,6 @@
 <template>
-    <div class="container">
+    <div class="container flex flex-col justify-center">
+        <NuxtLogo />
         <div class="px-8 py-32">
             <div class="grid gap-8 items-start justify-center">
                 <div class="relative group">

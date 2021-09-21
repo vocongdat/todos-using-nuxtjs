@@ -6,7 +6,7 @@
     >
         <label for="state" class="block text-xl font-medium text-gray-700">{{ labelTitle }}</label>
         <div class="mt-1">
-            <select id="state" v-model="value" name="state" :class="classes">
+            <select id="state" :value="value" name="state" :class="classes" @change="updateValue">
                 <option value="none" selected>Please Select</option>
                 <option value="created">Todo</option>
                 <option value="process">In Process</option>
@@ -30,11 +30,15 @@ export default {
             type: String,
             default: 'Type',
         },
+        value: {
+            type: String,
+            default: 'none',
+        },
     },
-    data() {
-        return {
-            value: '',
-        };
+    methods: {
+        updateValue(event) {
+            this.$emit('input', event.target.value);
+        },
     },
 };
 </script>

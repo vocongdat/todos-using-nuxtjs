@@ -6,12 +6,13 @@
         <div class="mt-1">
             <textarea
                 id="content"
-                v-model="value"
+                :value="value"
                 name="content"
                 cols="30"
                 rows="10"
                 placeholder="Enter todo..."
                 :class="classes"
+                @input="updateValue"
             ></textarea>
         </div>
         <span class="text-red-500">{{ errors[0] | capitalize }}</span>
@@ -26,10 +27,17 @@ export default {
         ValidationProvider,
     },
 
-    data() {
-        return {
-            value: '',
-        };
+    props: {
+        value: {
+            type: String,
+            default: '',
+        },
+    },
+
+    methods: {
+        updateValue(event) {
+            this.$emit('input', event.target.value);
+        },
     },
 };
 </script>

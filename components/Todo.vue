@@ -27,7 +27,7 @@
                 <span
                     v-for="member in todo.team"
                     :key="member"
-                    class="person-icon todo__item-person"
+                    class="person-icon todo__item-person whitespace-pre"
                     >{{ member.name | truncateName }}</span
                 >
             </div>

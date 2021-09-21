@@ -1,13 +1,15 @@
 export const state = () => ({
-    list: [],
+    todo: {
+        title: '',
+        content: [],
+        process: '',
+        team: [],
+    },
 });
 
 export const mutations = {
-    add(state, text) {
-        state.list.push({
-            text,
-            done: false,
-        });
+    add(state, formValue) {
+        state.list = formValue;
     },
     remove(state, { todo }) {
         state.list.splice(state.list.indexOf(todo), 1);

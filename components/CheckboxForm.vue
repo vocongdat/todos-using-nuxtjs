@@ -21,10 +21,11 @@
             </label>
             <input
                 :id="option.id"
-                v-model="checked"
+                v-model.lazy="checked"
                 name="team"
                 :value="option.id"
                 type="checkbox"
+                @change="updateValue"
             />
         </div>
         <span class="text-red-500">{{ errors[0] | capitalize }}</span>
@@ -65,6 +66,11 @@ export default {
         return {
             checked: [],
         };
+    },
+    methods: {
+        updateValue() {
+            this.$emit('input', this.checked);
+        },
     },
 };
 </script>
