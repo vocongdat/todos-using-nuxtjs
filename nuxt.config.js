@@ -50,6 +50,15 @@ export default {
                 return { x: 0, y: 50 };
             }
         },
+        base: '/',
+        extendRoutes(routes, resolve) {
+            routes.push({
+                path: '/addtodo/:id',
+                components: {
+                    default: resolve(__dirname, 'pages/addTodo'), // or routes[index].component
+                },
+            });
+        },
     },
 
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins

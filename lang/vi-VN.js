@@ -6,6 +6,7 @@ export default async (context, locale) => {
         chat: 'Trò chuyện',
         calender: 'Lịch',
         settings: 'Cài đặt',
+        addTodo: 'Thêm nhiệm vụ',
         logout: 'Đăng xuất',
         thisWeek: 'Tuần này',
         search: 'Tìm kiếm',

@@ -6,6 +6,7 @@ export default async (context, locale) => {
         chat: 'チャット',
         calender: 'カレンダー',
         settings: '設定',
+        addTodo: 'タスクを追加',
         logout: 'ログアウト',
         thisWeek: '今週',
         search: '検索',

@@ -57,6 +57,9 @@ export default {
             },
         },
     },
+    created() {
+        this.$apollo.queries.todoByProject.refetch();
+    },
 };
 </script>
 

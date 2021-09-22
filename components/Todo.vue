@@ -214,30 +214,9 @@ export default {
             });
         },
         handleEditTodo(id) {
-            // this.$router.push({
-            //     path: '/addtask/:id',
-            // });
-            // this.$apollo
-            //     .mutate({
-            //         mutation: deleteTodo,
-            //         variables: {
-            //             id,
-            //         },
-            //         // update: (store, { data: { addTag } }) => {
-            //         //     const { tags } = store.readQuery({ query: TAGS_QUERY })
-            //         //     const tagsCopy = tags.slice()
-            //         //     tagsCopy.push(addTag)
-            //         //     store.writeQuery({ query: TAGS_QUERY })
-            //         // },
-            //     })
-            //     .then((data) => {
-            //         // Result
-            //         console.log(data);
-            //     })
-            //     .catch((error) => {
-            //         // Error
-            //         console.error(error);
-            //     });
+            this.$router.push({
+                path: `/addtodo/${id}`,
+            });
         },
     },
 };

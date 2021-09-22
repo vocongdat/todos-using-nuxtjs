@@ -6,6 +6,7 @@ export default async (context, locale) => {
         chat: 'Chat',
         calender: 'Calender',
         settings: 'Settings',
+        addTodo: 'Add Todo',
         logout: 'Log out',
         thisWeek: 'This Week',
         search: 'Search',

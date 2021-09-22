@@ -1,6 +1,8 @@
 <template>
     <div class="flex flex-col justify-around h-screen w-48">
-        <h1 class="font-bold text-xl">.studio</h1>
+        <NuxtLink to="/" class="text-lg ml-4">
+            <h1 class="font-bold text-xl">.studio</h1>
+        </NuxtLink>
         <ul>
             <li
                 v-for="(navbar, index) in navbarList"
@@ -10,9 +12,7 @@
                 <div>
                     <i :class="navbar.icon"></i>
                 </div>
-                <NuxtLink :to="navbar.title | joinText" class="text-lg ml-4">{{
-                    $t(navbar.title)
-                }}</NuxtLink>
+                <NuxtLink :to="navbar.router" class="text-lg ml-4">{{ $t(navbar.title) }}</NuxtLink>
             </li>
         </ul>
         <ul class="text-gray-400">
@@ -53,22 +53,27 @@ export default {
             navbarList: [
                 {
                     title: 'overview',
+                    router: '/overview',
                     icon: 'fas fa-home text-xl',
                 },
                 {
-                    title: 'Add Task',
+                    title: 'addTodo',
+                    router: '/addtodo',
                     icon: 'fas fa-signal text-xl',
                 },
                 {
                     title: 'projects',
+                    router: '/projects',
                     icon: 'far fa-folder-open text-xl',
                 },
                 {
                     title: 'chat',
+                    router: '/chat',
                     icon: 'far fa-comment-alt text-xl',
                 },
                 {
                     title: 'calender',
+                    router: '/calender',
                     icon: 'far fa-calendar-alt text-xl',
                 },
             ],
