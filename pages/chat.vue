@@ -1,5 +1,5 @@
 <template>
-    <h1>Footer</h1>
+    <h1 class="text-2xl font-medium">Chat</h1>
 </template>
 
 <script>

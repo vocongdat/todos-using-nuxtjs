@@ -1,18 +1,21 @@
 export const state = () => ({
-  list: [],
-})
+    todoByProject: [],
+    todo: {
+        title: '',
+        content: [],
+        process: '',
+        team: [],
+    },
+});
 
 export const mutations = {
-  add(state, text) {
-    state.list.push({
-      text,
-      done: false,
-    })
-  },
-  remove(state, { todo }) {
-    state.list.splice(state.list.indexOf(todo), 1)
-  },
-  toggle(state, todo) {
-    todo.done = !todo.done
-  },
-}
+    add(state, formValue) {
+        state.todoByProject.push(formValue);
+    },
+    remove(state, { todo }) {
+        state.todoByProject.splice(state.todoByProject.indexOf(todo), 1);
+    },
+    toggle(state, todo) {
+        todo.done = !todo.done;
+    },
+};
