@@ -2,19 +2,30 @@
     <div class="todo-container todo__item">
         <div class="flex justify-between items-center my-2">
             <h3 class="todo-container-title my-1 font-medium">{{ title }}</h3>
-            <span class="bg-green-300 px-1.5 rounded-lg">2</span>
+            <span class="bg-green-300 px-1.5 rounded-lg">{{ listTodo.length }}</span>
         </div>
-
         <button class="btn todo__item--add">
             <i class="fas fa-plus"></i>
         </button>
+
         <div v-for="todo in listTodo" :key="todo.id" class="todo todo__item--main" draggable="true">
-            <div class="todo-header todo__item-header">
+            <div class="todo-header todo__item-header" :id="todo.id">
                 <h4 class="font-semibold">
                     <span class="notify-status bg-green-500"></span>
                     {{ todo.title }}
                 </h4>
-                <i class="fas fa-paperclip text-gray-400"></i>
+
+                <div>
+                    <button class="mr-2" @click="handleEditTodo(todo.id)">
+                        <i class="far fa-edit text-green-600"></i>
+                    </button>
+
+                    <button class="mr-2" @click="handleDeleteTodo(todo.id)">
+                        <i class="far fa-trash-alt text-red-600"></i>
+                    </button>
+
+                    <i class="fas fa-paperclip text-gray-400"></i>
+                </div>
             </div>
 
             <div class="todo__item-content my-3">
@@ -26,7 +37,7 @@
             <div class="todo__item-relationship">
                 <span
                     v-for="member in todo.team"
-                    :key="member"
+                    :key="member.id"
                     class="person-icon todo__item-person whitespace-pre"
                     >{{ member.name | truncateName }}</span
                 >
@@ -36,6 +47,9 @@
 </template>
 
 <script>
+import deleteTodo from '~/apollo/mutation/deleteTodo';
+import updateStateTodo from '~/apollo/mutation/updateStateTodo';
+
 export default {
     filters: {
         truncateString: (string, length) => {
@@ -61,7 +75,16 @@ export default {
 
     data() {
         return {
-            state: '',
+            draggableValue: {
+                state: {
+                    type: String,
+                    default: '',
+                },
+                id: {
+                    type: String,
+                    default: '',
+                },
+            },
         };
     },
 
@@ -88,7 +111,29 @@ export default {
                 const containerDragging = getParent(e.target, '.todo-container');
                 const titleDragging =
                     containerDragging.querySelector('.todo-container-title').outerText;
-                this.state = titleDragging;
+
+                switch (titleDragging) {
+                    case 'To do':
+                        this.draggableValue.state = 'created';
+                        break;
+                    case 'In process':
+                        this.draggableValue.state = 'process';
+                        break;
+                    case 'Completed':
+                        this.draggableValue.state = 'completed';
+                        break;
+                    default:
+                        this.draggableValue.state = '';
+                }
+
+                const { id } = draggable.querySelector('.todo__item-header');
+                this.draggableValue.id = id;
+                this.$apollo.mutate({
+                    mutation: updateStateTodo,
+                    variables: {
+                        ...this.draggableValue,
+                    },
+                });
             });
         });
         const getDragAfterElement = (container, y) => {
@@ -122,6 +167,78 @@ export default {
                 }
             });
         });
+    },
+
+    methods: {
+        handleDeleteTodo(id) {
+            this.$confirm({
+                title: 'Are you sure?',
+                message: `Are you sure you want to delete?`,
+                button: {
+                    no: 'No',
+                    yes: 'Delete',
+                },
+                callback: (confirm) => {
+                    if (confirm) {
+                        this.$apollo
+                            .mutate({
+                                mutation: deleteTodo,
+                                variables: {
+                                    id,
+                                },
+                                // update: (store, { data: { addTag } }) => {
+                                //     const { tags } = store.readQuery({ query: TAGS_QUERY })
+                                //     const tagsCopy = tags.slice()
+                                //     tagsCopy.push(addTag)
+                                //     store.writeQuery({ query: TAGS_QUERY })
+                                // },
+                            })
+                            .then(
+                                ({
+                                    data: {
+                                        deleteTodo: { title },
+                                    },
+                                }) => {
+                                    this.$toast.show(`Delete todo: "${title}" success! 🤪`, {
+                                        type: 'success',
+                                    });
+                                }
+                            )
+                            .catch((error) => {
+                                this.$toast.show(`Something wrong: "${error}"`, {
+                                    type: 'error',
+                                });
+                            });
+                    }
+                },
+            });
+        },
+        handleEditTodo(id) {
+            // this.$router.push({
+            //     path: '/addtask/:id',
+            // });
+            // this.$apollo
+            //     .mutate({
+            //         mutation: deleteTodo,
+            //         variables: {
+            //             id,
+            //         },
+            //         // update: (store, { data: { addTag } }) => {
+            //         //     const { tags } = store.readQuery({ query: TAGS_QUERY })
+            //         //     const tagsCopy = tags.slice()
+            //         //     tagsCopy.push(addTag)
+            //         //     store.writeQuery({ query: TAGS_QUERY })
+            //         // },
+            //     })
+            //     .then((data) => {
+            //         // Result
+            //         console.log(data);
+            //     })
+            //     .catch((error) => {
+            //         // Error
+            //         console.error(error);
+            //     });
+        },
     },
 };
 </script>

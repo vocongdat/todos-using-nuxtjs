@@ -1,7 +1,10 @@
 <template>
     <div class="todos flex flex-col w-full mt-10">
+        <vue-confirm-dialog></vue-confirm-dialog>
+
         <div class="todos__header flex flex-row justify-between items-center mb-5">
             <h2 class="text-2xl font-medium">{{ $t('projects') }}</h2>
+
             <div>
                 <span>{{ $t('thisWeek') }}</span>
                 <i class="fas fa-chevron-down text-sm"></i>

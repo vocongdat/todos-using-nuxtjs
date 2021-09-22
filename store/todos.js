@@ -1,4 +1,5 @@
 export const state = () => ({
+    todoByProject: [],
     todo: {
         title: '',
         content: [],
@@ -9,10 +10,10 @@ export const state = () => ({
 
 export const mutations = {
     add(state, formValue) {
-        state.list = formValue;
+        state.todoByProject.push(formValue);
     },
     remove(state, { todo }) {
-        state.list.splice(state.list.indexOf(todo), 1);
+        state.todoByProject.splice(state.todoByProject.indexOf(todo), 1);
     },
     toggle(state, todo) {
         todo.done = !todo.done;

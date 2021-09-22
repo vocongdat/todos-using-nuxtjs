@@ -63,6 +63,7 @@ export default {
         '~/plugins/vee-validate',
         '~/plugins/validation',
         { src: '~plugins/vue-calendar.js', mode: 'client' },
+        { src: '~plugins/vue-confirm-dialog.js', mode: 'client' },
     ],
 
     // Auto import components: https://go.nuxtjs.dev/config-components
@@ -101,6 +102,7 @@ export default {
         ],
         // Apollo
         '@nuxtjs/apollo',
+        '@nuxtjs/toast',
     ],
 
     i18n: {
@@ -170,5 +172,21 @@ export default {
     cli: {
         badgeMessages: ['Hello NuxtJS!'],
         bannerColor: 'yellow',
+    },
+
+    toast: {
+        position: 'top-right',
+        theme: 'bubble',
+        duration: 3000,
+        register: [
+            // Register custom toasts
+            {
+                name: 'my-error',
+                message: 'Oops...Something went wrong',
+                options: {
+                    type: 'error',
+                },
+            },
+        ],
     },
 };

@@ -1,5 +1,5 @@
 <template>
-    <ValidationProvider v-slot="{ classes, errors }" rules="max:120|required">
+    <ValidationProvider v-slot="{ classes, errors }" rules="min:5|required">
         <label for="content" class="block text-xl font-medium text-gray-700" :class="classes"
             >Content</label
         >

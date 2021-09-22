@@ -3,8 +3,8 @@
         <h1 class="font-bold text-xl">.studio</h1>
         <ul>
             <li
-                v-for="navbar in navbarList"
-                :key="navbar.index"
+                v-for="(navbar, index) in navbarList"
+                :key="index"
                 class="flex flex-row items-center justify-start py-4 text-gray-400"
             >
                 <div>

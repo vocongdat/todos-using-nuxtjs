@@ -1,4 +1,4 @@
-import { extend } from 'vee-validate';
+import { extend, configure } from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
 
 extend('positive', (value) => {
@@ -37,4 +37,13 @@ for (const [rule, validation] of Object.entries(rules)) {
 extend('required', {
     ...rules.required,
     message: 'This field is required',
+});
+
+configure({
+    classes: {
+        valid: 'is-valid',
+        invalid: 'is-invalid',
+        dirty: ['is-dirty', 'is-dirty'], // multiple classes per flag!
+        // ...
+    },
 });

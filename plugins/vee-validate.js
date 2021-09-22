@@ -22,12 +22,8 @@ const i18n = new VueI18n({
 
 const config = {
     aria: true,
-    classNames: {
-        valid: 'is-valid',
-        invalid: 'is-invalid',
-        dirty: ['is-dirty', 'is-dirty'],
-    },
-    classes: true,
+    classNames: {},
+    classes: false,
     delay: 0,
     dictionary: null,
     errorBagName: 'errors', // change if property conflicts
