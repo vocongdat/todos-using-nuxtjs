@@ -1,8 +1,13 @@
 module.exports = {
   purge: [],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: 'class',
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['Satoshi', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['Clash Display', 'Satoshi', 'sans-serif'],
+      },
+    },
   },
   variants: {
     extend: {},

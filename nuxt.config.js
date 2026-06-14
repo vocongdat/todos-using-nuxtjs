@@ -1,35 +1,55 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'learn-nuxt-js',
+    title: 'Tasks — a calm task board',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      {
+        hid: 'description',
+        name: 'description',
+        content:
+          'Tasks — a minimal, premium kanban board built with Nuxt.js. Drag tasks across your workflow, in light or dark mode.',
+      },
       { name: 'format-detection', content: 'telephone=no' },
+      { name: 'theme-color', content: '#6366f1' },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'preconnect', href: 'https://api.fontshare.com' },
+      {
+        rel: 'preconnect',
+        href: 'https://cdn.fontshare.com',
+        crossorigin: true,
+      },
       {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap',
+        href: 'https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=clash-display@500,600,700&display=swap',
       },
       {
         rel: 'stylesheet',
         href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css',
       },
     ],
+    script: [
+      {
+        // Apply the saved/system theme before first paint to avoid a flash.
+        innerHTML:
+          "(function(){try{var t=localStorage.getItem('theme');if(!t){t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}if(t==='dark'){document.documentElement.classList.add('dark');}}catch(e){}})();",
+      },
+    ],
+    __dangerouslyDisableSanitizers: ['script'],
   },
-  loading: '~/components/LoadingBar.vue',
+  loading: { color: '#6366f1', height: '2px' },
   loadingIndicator: {
     name: 'circle',
-    color: '#3B8070',
-    background: 'white',
+    color: '#6366f1',
+    background: '#f6f7f9',
   },
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    '~/assets/styles/base.scss',
     '~/assets/styles/main.scss',
+    '~/assets/styles/theme.scss',
     '~/assets/fonts/flag-icon-css-master/css/flag-icon.min.css',
   ],
 
@@ -37,9 +57,7 @@ export default {
 
   pageTransition: {
     name: 'slide-fade',
-    beforeEnter(el) {
-      console.log('Before enter...', el)
-    },
+    mode: 'out-in',
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -48,6 +66,7 @@ export default {
     '~/plugins/vue-tooltip.js',
     '~/plugins/hello.js',
     '~/plugins/i18n.js',
+    '~/plugins/persist.client.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
