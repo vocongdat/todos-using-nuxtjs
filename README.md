@@ -2,20 +2,27 @@
 
 ## Build Setup
 
+This project uses [pnpm](https://pnpm.io). With [corepack](https://nodejs.org/api/corepack.html)
+(`corepack enable`) the pinned pnpm version is used automatically; otherwise
+install pnpm with `npm i -g pnpm`.
+
 ```bash
 # install dependencies
-$ yarn install
+$ pnpm install
 
 # serve with hot reload at localhost:3000
-$ yarn dev
+$ pnpm dev
 
 # build for production and launch server
-$ yarn build
-$ yarn start
+$ pnpm build
+$ pnpm start
 
 # generate static project
-$ yarn generate
+$ pnpm generate
 ```
+
+> **Node 18+ note:** this is a Nuxt 2 (webpack 4) app. On newer Node versions
+> set `NODE_OPTIONS=--openssl-legacy-provider` before `pnpm build`/`pnpm dev`.
 
 For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
 
